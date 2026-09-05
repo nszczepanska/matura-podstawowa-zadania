@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Matura z Matematyki - Zadania</title>
     
     <script>
@@ -776,8 +779,10 @@ window.MathJax = {
 
         
         // --- Authentication ---
+        const AUTH_KEY = 'matura_auth_v2';
+
         function checkAuth() {
-            return localStorage.getItem('matura_auth') === 'true';
+            return localStorage.getItem(AUTH_KEY) === 'true';
         }
 
         function updateAuthUI() {
@@ -806,7 +811,7 @@ window.MathJax = {
             const errorBox = document.getElementById('auth-error');
             
             if (user === 'bdnr' && pass === 'kochammatematyke') {
-                localStorage.setItem('matura_auth', 'true');
+                localStorage.setItem(AUTH_KEY, 'true');
                 if (errorBox) errorBox.style.display = 'none';
                 const passInput = document.getElementById('auth-pass');
                 if (passInput) passInput.value = '';
@@ -831,6 +836,7 @@ window.MathJax = {
         }
 
         function handleLogout() {
+            localStorage.removeItem(AUTH_KEY);
             localStorage.removeItem('matura_auth');
             updateAuthUI();
         }
