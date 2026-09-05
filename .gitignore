@@ -1,0 +1,8 @@
+cache/
+cache_html/
+scripts/
+*.py
+*.applescript
+debug.html
+test.js
+.DS_Store
