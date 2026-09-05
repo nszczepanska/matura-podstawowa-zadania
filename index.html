@@ -275,6 +275,23 @@ window.MathJax = {
             margin-bottom: 1em;
         }
 
+        /* Content / Solution Images */
+        .content-image {
+            margin: 15px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .content-image img {
+            max-width: 100%;
+            max-height: 420px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: #ffffff;
+            object-fit: contain;
+            display: block;
+        }
+
         /* Task images */
         .task-images {
             margin: 20px 0;
@@ -668,6 +685,10 @@ window.MathJax = {
             });
 
             // === Step 2: Standard markdown transforms ===
+            // Images: ![alt](url) and [obrazek: url] / [rysunek: url]
+            html = html.replace(/!\[(.*?)\]\((.*?)\)/g, '<div class="content-image"><img src="$2" alt="" loading="lazy" onerror="this.style.display=\'none\'"></div>');
+            html = html.replace(/\[(?:obrazek|rysunek):\s*(https?:\/\/[^\s\]]+)\]/gi, '<div class="content-image"><img src="$1" alt="" loading="lazy" onerror="this.style.display=\'none\'"></div>');
+
             // Bold
             html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             // Italic (only single star not inside word, careful to not catch **)
@@ -683,7 +704,8 @@ window.MathJax = {
             
             // Paragraphs (split by double newline, wrap in <p>, ignore if already block tag)
             html = html.split(/\n\n+/).map(p => {
-                if (p.trim().startsWith('<h') || p.trim().startsWith('<ul')) return p;
+                const trimmed = p.trim();
+                if (trimmed.startsWith('<h') || trimmed.startsWith('<ul') || trimmed.startsWith('<div')) return p;
                 return `<p>${p.replace(/\n/g, '<br>')}</p>`;
             }).join('');
             
