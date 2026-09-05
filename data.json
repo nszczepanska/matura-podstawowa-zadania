@@ -2,7 +2,7 @@
   "generatedAt": "2026-09-04T21:15:11",
   "source": "https://www.szaloneliczby.pl/",
   "attribution": "Zadania pochodzą z publicznych arkuszy CKE. Rozwiązania: <a href='https://www.szaloneliczby.pl/' target='_blank'>szaloneliczby.pl</a>. Strona stworzona w celach edukacyjnych.",
-  "totalTasks": 2376,
+  "totalTasks": 2380,
   "topics": [
     {
       "slug": "ciagi",
@@ -39596,7 +39596,7 @@
     {
       "slug": "wielomiany",
       "title": "Wielomiany",
-      "taskCount": 2,
+      "taskCount": 6,
       "tasks": [
         {
           "id": "matura-maj-2024-08",
@@ -39630,6 +39630,58 @@
           "answers": [],
           "correctAnswer": "\\(x=2\\) lub \\( x=\\sqrt{3}\\) lub \\(x=-\\sqrt{3}\\)",
           "solution": "Rozwiązujemy równanie:\n\n$$x^3 - 2x^2 - 3x + 6 = 0$$\n\n**Krok 1.** Grupujemy wyrazy.\n\n$$x^2(x - 2) - 3(x - 2) = 0$$\n\n**Krok 2.** Wyciągamy wspólny czynnik \\((x-2)\\).\n\n$$(x - 2)(x^2 - 3) = 0$$\n\n**Krok 3.** Rozwiązujemy każdy czynnik osobno.\n\nPierwszy czynnik:\n\n$$x - 2 = 0 \\implies x = 2$$\n\nDrugi czynnik:\n\n$$x^2 - 3 = 0 \\implies x^2 = 3 \\implies x = \\sqrt{3} \\quad \\text{lub} \\quad x = -\\sqrt{3}$$\n\n**Odpowiedź:** Równanie ma trzy rozwiązania: \\(x = 2\\), \\(x = \\sqrt{3}\\) lub \\(x = -\\sqrt{3}\\).",
+          "images": []
+        },
+        {
+          "id": "matura-maj-2021-01",
+          "title": "Zadanie matura-maj-2021-01",
+          "source": "Matura maj 2021",
+          "category": "Wielomiany",
+          "points": 2,
+          "type": "open",
+          "content": "Rozwiąż równanie \\[x^3+5x^2-2x-10 = 0\\] Zapisz obliczenia.",
+          "answers": [],
+          "correctAnswer": "\\(x=-5\\) lub \\(x=\\sqrt{2}\\) lub \\(x=-\\sqrt{2}\\)",
+          "solution": "Rozwiązujemy równanie metodą grupowania wyrazów:\n\n$$x^3 + 5x^2 - 2x - 10 = 0$$\n\nZ pierwszej i drugiej pary wyciągamy wspólny czynnik przed nawias:\n\n$$x^2(x + 5) - 2(x + 5) = 0$$\n\n$$(x^2 - 2)(x + 5) = 0$$\n\nKiedy iloczyn jest równy zero? Kiedy przynajmniej jeden z czynników jest zerem:\n\n$$x^2 - 2 = 0 \\quad \\text{lub} \\quad x + 5 = 0$$\n\n$$x^2 = 2 \\quad \\text{lub} \\quad x = -5$$\n\n$$x = \\sqrt{2} \\quad \\text{lub} \\quad x = -\\sqrt{2} \\quad \\text{lub} \\quad x = -5$$\n\n**Odpowiedź:** \\(x \\in \\{-5, -\\sqrt{2}, \\sqrt{2}\\}\\).",
+          "images": []
+        },
+        {
+          "id": "matura-czerwiec-2020-01",
+          "title": "Zadanie matura-czerwiec-2020-01",
+          "source": "Matura czerwiec 2020",
+          "category": "Wielomiany",
+          "points": 2,
+          "type": "open",
+          "content": "Rozwiąż równanie \\[4x^3-12x^2-x+3 = 0\\] Zapisz obliczenia.",
+          "answers": [],
+          "correctAnswer": "\\(x=3\\) lub \\(x=\\frac{1}{2}\\) lub \\(x=-\\frac{1}{2}\\)",
+          "solution": "Rozwiązujemy równanie metodą grupowania wyrazów:\n\n$$4x^3 - 12x^2 - x + 3 = 0$$\n\n$$4x^2(x - 3) - 1(x - 3) = 0$$\n\n$$(4x^2 - 1)(x - 3) = 0$$\n\nPrzyrównujemy oba czynniki do zera:\n\n$$4x^2 - 1 = 0 \\quad \\text{lub} \\quad x - 3 = 0$$\n\n$$4x^2 = 1 \\implies x^2 = \\frac{1}{4} \\quad \\text{lub} \\quad x = 3$$\n\n$$x = \\frac{1}{2} \\quad \\text{lub} \\quad x = -\\frac{1}{2} \\quad \\text{lub} \\quad x = 3$$\n\n**Odpowiedź:** Rozwiązania to \\(x \\in \\{-\\frac{1}{2}, \\frac{1}{2}, 3\\}\\).",
+          "images": []
+        },
+        {
+          "id": "matura-sierpien-2022-01",
+          "title": "Zadanie matura-sierpien-2022-01",
+          "source": "Matura sierpień 2022",
+          "category": "Wielomiany",
+          "points": 2,
+          "type": "open",
+          "content": "Rozwiąż równanie \\[2x^3+3x^2 = 10x+15\\] Zapisz obliczenia.",
+          "answers": [],
+          "correctAnswer": "\\(x=-\\frac{3}{2}\\) lub \\(x=\\sqrt{5}\\) lub \\(x=-\\sqrt{5}\\)",
+          "solution": "Przenosimy wszystkie wyrazy na lewą stronę i grupujemy:\n\n$$2x^3 + 3x^2 - 10x - 15 = 0$$\n\n$$x^2(2x + 3) - 5(2x + 3) = 0$$\n\n$$(x^2 - 5)(2x + 3) = 0$$\n\nRozwiązujemy poszczególne nawiasy:\n\n$$x^2 - 5 = 0 \\quad \\text{lub} \\quad 2x + 3 = 0$$\n\n$$x^2 = 5 \\implies x = \\sqrt{5} \\quad \\text{lub} \\quad x = -\\sqrt{5}$$\n\n$$2x = -3 \\implies x = -\\frac{3}{2}$$\n\n**Odpowiedź:** \\(x \\in \\{-\\sqrt{5}, -\\frac{3}{2}, \\sqrt{5}\\}\\).",
+          "images": []
+        },
+        {
+          "id": "matura-maj-2019-01",
+          "title": "Zadanie matura-maj-2019-01",
+          "source": "Matura maj 2019",
+          "category": "Wielomiany",
+          "points": 2,
+          "type": "open",
+          "content": "Rozwiąż równanie \\[3x^3 - 2x^2 - 3x + 2 = 0\\] Zapisz obliczenia.",
+          "answers": [],
+          "correctAnswer": "\\(x=\\frac{2}{3}\\) lub \\(x=1\\) lub \\(x=-1\\)",
+          "solution": "Rozwiązujemy przez grupowanie:\n\n$$3x^3 - 2x^2 - 3x + 2 = 0$$\n\n$$x^2(3x - 2) - 1(3x - 2) = 0$$\n\n$$(x^2 - 1)(3x - 2) = 0$$\n\nRozkładamy wzorem skróconego mnożenia lub od razu przyrównujemy do zera:\n\n$$(x - 1)(x + 1)(3x - 2) = 0$$\n\nStąd otrzymujemy:\n\n$$x - 1 = 0 \\implies x = 1$$\n\n$$x + 1 = 0 \\implies x = -1$$\n\n$$3x - 2 = 0 \\implies x = \\frac{2}{3}$$\n\n**Odpowiedź:** \\(x \\in \\{-1, \\frac{2}{3}, 1\\}\\).",
           "images": []
         }
       ]
