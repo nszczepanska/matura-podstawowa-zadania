@@ -103,17 +103,44 @@ window.MathJax = {
 
         /* Search */
         .search-container {
+            position: relative;
             margin-bottom: 30px;
         }
 
         .search-input {
             width: 100%;
-            padding: 15px 20px;
+            padding: 15px 45px 15px 20px;
             font-size: 1.1rem;
             border: 2px solid var(--border);
             border-radius: 12px;
             outline: none;
             transition: border-color 0.2s;
+        }
+
+        .btn-clear-search {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #E5E7EB;
+            color: #4B5563;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.3rem;
+            line-height: 1;
+            padding: 0;
+            transition: all 0.2s;
+        }
+
+        .btn-clear-search:hover {
+            background: #D1D5DB;
+            color: #111827;
         }
 
         .search-input:focus {
@@ -654,6 +681,7 @@ window.MathJax = {
         // --- State ---
         const state = {
             searchQuery: '',
+            lastListView: '#/',
             filterPoints: 'all', // 'all', '1', '2', '3+'
             filterType: 'all' // 'all', 'closed', 'open'
         };
@@ -700,7 +728,7 @@ window.MathJax = {
             // Protect display math: \[...\]
             html = html.replace(/\\\[([\s\S]*?)\\\]/g, (match, inner) => {
                 const idx = mathPlaceholders.length;
-                mathPlaceholders.push(`\[${formatDisplayMath(inner)}\]`);
+                mathPlaceholders.push('\\[' + formatDisplayMath(inner) + '\\]');
                 return `MATHBLOCK_${idx}_END`;
             });
             // Protect inline math: \(...\)  — use [\s\S]*? to cross newlines safely
@@ -873,6 +901,10 @@ window.MathJax = {
             const route = getRoute();
             const appEl = document.getElementById('app');
             
+            if (route.view === 'home' || route.view === 'topic') {
+                state.lastListView = window.location.hash || '#/';
+            }
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
             switch (route.view) {
@@ -893,6 +925,16 @@ window.MathJax = {
             setupKeyboardShortcuts(route);
         }
 
+        function handleTaskBack(topicSlug) {
+            if (state.searchQuery && state.searchQuery.trim().length > 0) {
+                window.location.hash = '#/';
+            } else if (state.lastListView && !state.lastListView.includes('/' + topicSlug + '/')) {
+                window.location.hash = state.lastListView;
+            } else {
+                window.location.hash = `#/topic/${topicSlug}`;
+            }
+        }
+
         // --- Views ---
 
         function renderHome(container) {
@@ -902,12 +944,20 @@ window.MathJax = {
             let html = `
                 <div class="search-container">
                     <input type="text" class="search-input" id="search-input" placeholder="Szukaj zadań..." value="${state.searchQuery}">
+                    ${state.searchQuery ? `<button id="btn-clear-search-input" class="btn-clear-search" title="Wyczyść wyszukiwanie">&times;</button>` : ''}
                 </div>
             `;
             
             if (state.searchQuery.trim().length > 0) {
                 // Render search results
-                html += `<h2>Wyniki wyszukiwania dla "${state.searchQuery}"</h2><div class="task-list" style="margin-top:20px;">`;
+                html += `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0 15px; flex-wrap: wrap; gap: 12px;">
+                    <h2 style="margin: 0; font-size: 1.4rem;">Wyniki wyszukiwania dla &bdquo;${state.searchQuery}&rdquo;</h2>
+                    <button id="btn-search-back" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">
+                        &larr; Wstecz do działów
+                    </button>
+                </div>
+                <div class="task-list" style="margin-top:15px;">`;
                 
                 let foundTasks = [];
                 const query = state.searchQuery.toLowerCase();
@@ -927,7 +977,13 @@ window.MathJax = {
                         html += generateTaskItemHtml(task, topic.slug, topic.title);
                     });
                 } else {
-                    html += `<div class="empty-state">Nie znaleziono zadań spełniających kryteria.</div>`;
+                    html += `
+                    <div class="empty-state">
+                        <p style="margin-bottom: 16px; font-size: 1.05rem;">Nie znaleziono zadań dla &bdquo;${state.searchQuery}&rdquo;.</p>
+                        <button id="btn-empty-back" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; font-size: 0.9rem; cursor: pointer;">
+                            &larr; Wstecz do działów
+                        </button>
+                    </div>`;
                 }
                 html += `</div>`;
             } else {
@@ -950,7 +1006,22 @@ window.MathJax = {
             
             container.innerHTML = html;
             
-            // Bind search
+            // Clear search action
+            const clearSearch = () => {
+                state.searchQuery = '';
+                router();
+            };
+
+            const btnSearchBack = document.getElementById('btn-search-back');
+            if (btnSearchBack) btnSearchBack.addEventListener('click', clearSearch);
+
+            const btnClearInput = document.getElementById('btn-clear-search-input');
+            if (btnClearInput) btnClearInput.addEventListener('click', clearSearch);
+
+            const btnEmptyBack = document.getElementById('btn-empty-back');
+            if (btnEmptyBack) btnEmptyBack.addEventListener('click', clearSearch);
+
+            // Bind search input
             const searchInput = document.getElementById('search-input');
             searchInput.addEventListener('input', (e) => {
                 state.searchQuery = e.target.value;
@@ -1013,8 +1084,13 @@ window.MathJax = {
             }
 
             let html = `
-                <div class="breadcrumb">
-                    <a href="#/">Działy</a> &raquo; ${topic.title}
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                    <div class="breadcrumb" style="margin-bottom: 0;">
+                        <a href="#/">Działy</a> &raquo; ${topic.title}
+                    </div>
+                    <a href="#/" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; font-size: 0.9rem; font-weight: 500;">
+                        &larr; Wróć do działów
+                    </a>
                 </div>
                 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
@@ -1094,8 +1170,13 @@ window.MathJax = {
             const shownAnswer = embeddedAnswer || task.correctAnswer;
 
             let html = `
-                <div class="breadcrumb">
-                    <a href="#/">Działy</a> &raquo; <a href="#/topic/${topic.slug}">${topic.title}</a> &raquo; Zadanie ${task.id}
+                <div class="task-top-bar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+                    <div class="breadcrumb" style="margin-bottom: 0;">
+                        <a href="#/">Działy</a> &raquo; <a href="#/topic/${topic.slug}">${topic.title}</a> &raquo; Zadanie ${task.id}
+                    </div>
+                    <button id="btn-task-back" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">
+                        &larr; Wstecz
+                    </button>
                 </div>
                 
                 <div class="task-detail">
@@ -1141,8 +1222,9 @@ window.MathJax = {
                     <div>
                         ${prevTask ? `<a href="#/topic/${topic.slug}/${prevTask.id}" class="btn btn-secondary" id="nav-prev">&larr; Poprzednie</a>` : ''}
                     </div>
-                    <div class="task-progress">
-                        Zadanie ${taskIndex + 1} z ${topic.tasks.length}
+                    <div class="task-progress" style="display: flex; align-items: center; gap: 12px;">
+                        <button id="btn-task-back-bottom" class="btn btn-secondary" style="padding: 4px 12px; font-size: 0.85rem; cursor: pointer;">&larr; Wstecz</button>
+                        <span>Zadanie ${taskIndex + 1} z ${topic.tasks.length}</span>
                     </div>
                     <div>
                         ${nextTask ? `<a href="#/topic/${topic.slug}/${nextTask.id}" class="btn btn-secondary" id="nav-next">Następne &rarr;</a>` : ''}
@@ -1153,6 +1235,12 @@ window.MathJax = {
             container.innerHTML = html;
             
             // Setup buttons
+            const onBackClick = () => handleTaskBack(topic.slug);
+            const btnTaskBack = document.getElementById('btn-task-back');
+            if (btnTaskBack) btnTaskBack.addEventListener('click', onBackClick);
+            const btnTaskBackBottom = document.getElementById('btn-task-back-bottom');
+            if (btnTaskBackBottom) btnTaskBackBottom.addEventListener('click', onBackClick);
+
             const btnAnswer = document.getElementById('btn-answer');
             const btnSolution = document.getElementById('btn-solution');
             const solArea = document.getElementById('solution-area');
