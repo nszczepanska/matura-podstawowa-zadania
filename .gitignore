@@ -6,3 +6,10 @@ scripts/
 debug.html
 test.js
 .DS_Store
+venv/
+pdfs/
+*.pdf
+fetched.html
+image.svg
+image.svgz
+page_*.png

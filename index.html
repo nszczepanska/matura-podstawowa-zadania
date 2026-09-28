@@ -1121,8 +1121,11 @@
                 display: none !important;
             }
 
-            .print-only {
+            .print-only:not(.print-hidden) {
                 display: block !important;
+            }
+            .print-hidden {
+                display: none !important;
             }
 
             .test-print-header {
@@ -1506,6 +1509,18 @@
                 clearBtn.disabled = count === 0;
                 clearBtn.style.opacity = count === 0 ? '0.6' : '1';
                 clearBtn.style.cursor = count === 0 ? 'not-allowed' : 'pointer';
+            }
+            const answersBtn = document.getElementById('btn-print-answers');
+            if (answersBtn) {
+                answersBtn.disabled = count === 0;
+                answersBtn.style.opacity = count === 0 ? '0.6' : '1';
+                answersBtn.style.cursor = count === 0 ? 'not-allowed' : 'pointer';
+            }
+            const solutionsBtn = document.getElementById('btn-print-solutions');
+            if (solutionsBtn) {
+                solutionsBtn.disabled = count === 0;
+                solutionsBtn.style.opacity = count === 0 ? '0.6' : '1';
+                solutionsBtn.style.cursor = count === 0 ? 'not-allowed' : 'pointer';
             }
         }
 
@@ -2637,6 +2652,12 @@
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
                                     Drukuj / Eksportuj do PDF
                                 </button>
+                                <button id="btn-print-answers" class="btn btn-secondary" ${fullTasks.length === 0 ? 'disabled style="opacity: 0.6; cursor: not-allowed;"' : ''}>
+                                    📋 Karta odpowiedzi (PDF)
+                                </button>
+                                <button id="btn-print-solutions" class="btn btn-secondary" ${fullTasks.length === 0 ? 'disabled style="opacity: 0.6; cursor: not-allowed;"' : ''}>
+                                    📝 Pełne rozwiązania (PDF)
+                                </button>
                                 <button id="btn-clear-test" class="btn btn-secondary" ${fullTasks.length === 0 ? 'disabled style="opacity: 0.6; cursor: not-allowed;"' : ''}>
                                     Wyczyść sprawdzian
                                 </button>
@@ -2817,6 +2838,14 @@
                     saveCustomTest(cur);
                     renderSprawdzian(container);
                 }
+            });
+
+            document.getElementById('btn-print-answers')?.addEventListener('click', () => {
+                printAnswerKey();
+            });
+
+            document.getElementById('btn-print-solutions')?.addEventListener('click', () => {
+                printSolutions();
             });
 
             // Bind Tab buttons
@@ -3069,6 +3098,181 @@
                     `).join('')}
                 </div>
             `;
+        }
+
+        function printAnswerKey() {
+            const test = getCustomTest();
+            if (!test.tasks || test.tasks.length === 0) {
+                alert('Sprawdzian jest pusty! Dodaj najpierw zadania do sprawdzianu.');
+                return;
+            }
+            const fullTasks = [];
+            test.tasks.forEach(item => {
+                const { task, topic } = findTask(item.id);
+                if (task) {
+                    const pts = (item.customPoints !== undefined && item.customPoints !== null) ? Number(item.customPoints) : (task.points || 1);
+                    fullTasks.push({ ...task, customPoints: pts, topicSlug: topic?.slug, topicTitle: topic?.title });
+                }
+            });
+
+            if (test.autoCalcPoints) {
+                test.maxPoints = getTestTotalPoints(test);
+            }
+
+            // Build answer key HTML
+            let rows = '';
+            fullTasks.forEach((task, idx) => {
+                const num = idx + 1;
+                const typeLabel = task.type === 'closed' ? 'Zamknięte' : (task.type === 'pf' ? 'P/F' : 'Otwarte');
+                let answer = '';
+                if (task.correctAnswer) {
+                    answer = task.correctAnswer;
+                }
+                // For PF tasks, build the answer from pfAnswers
+                if (task.type === 'pf' && task.pfAnswers && task.pfAnswers.length > 0) {
+                    answer = task.pfAnswers.map((a, i) => (i+1) + '. ' + a).join(', ');
+                }
+                
+                rows += `
+                    <tr>
+                        <td style="padding: 8px 12px; border: 1px solid #ddd; text-align: center; font-weight: 600;">${num}</td>
+                        <td style="padding: 8px 12px; border: 1px solid #ddd; text-align: center;">${task.customPoints}</td>
+                        <td style="padding: 8px 12px; border: 1px solid #ddd; text-align: center; font-size: 0.85rem; color: #666;">${typeLabel}</td>
+                        <td style="padding: 8px 12px; border: 1px solid #ddd;" class="answer-cell">${parseMarkdown(answer)}</td>
+                    </tr>`;
+            });
+
+            const answerKeyHtml = `
+                <div class="print-only answer-key-print" style="display: none;">
+                    <div class="test-print-page page-first" style="padding: 40px;">
+                        <div style="text-align: center; margin-bottom: 30px;">
+                            <div style="font-size: 1.4rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">${test.title || 'SPRAWDZIAN Z MATEMATYKI'}</div>
+                            <div style="font-size: 1.1rem; font-weight: 700; color: #4F46E5; margin-top: 8px;">KARTA ODPOWIEDZI</div>
+                            <div style="font-size: 0.85rem; color: #888; margin-top: 4px;">Maksymalna liczba punktów: ${test.maxPoints}</div>
+                        </div>
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.95rem;">
+                            <thead>
+                                <tr style="background: #F3F4F6;">
+                                    <th style="padding: 10px 12px; border: 1px solid #ddd; text-align: center; width: 80px;">Zadanie</th>
+                                    <th style="padding: 10px 12px; border: 1px solid #ddd; text-align: center; width: 60px;">Punkty</th>
+                                    <th style="padding: 10px 12px; border: 1px solid #ddd; text-align: center; width: 80px;">Typ</th>
+                                    <th style="padding: 10px 12px; border: 1px solid #ddd; text-align: left;">Poprawna odpowiedź</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${rows}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>`;
+
+            // Remove any existing answer key print
+            document.querySelectorAll('.answer-key-print').forEach(el => el.remove());
+            // Also temporarily hide the main test print sheet using class (CSS !important overrides inline style)
+            const mainPrint = document.querySelector('.print-only:not(.answer-key-print):not(.solutions-print)');
+            if (mainPrint) mainPrint.classList.add('print-hidden');
+
+            // Insert the answer key
+            const appEl = document.getElementById('app') || document.body;
+            appEl.insertAdjacentHTML('beforeend', answerKeyHtml);
+
+            const akEl = document.querySelector('.answer-key-print');
+            if (akEl) {
+                renderMath(akEl);
+            }
+
+            // Print
+            setTimeout(() => {
+                window.print();
+                // Cleanup: remove answer key, restore main print
+                setTimeout(() => {
+                    document.querySelectorAll('.answer-key-print').forEach(el => el.remove());
+                    if (mainPrint) mainPrint.classList.remove('print-hidden');
+                }, 500);
+            }, 200);
+        }
+
+        function printSolutions() {
+            const test = getCustomTest();
+            if (!test.tasks || test.tasks.length === 0) {
+                alert('Sprawdzian jest pusty! Dodaj najpierw zadania do sprawdzianu.');
+                return;
+            }
+            const fullTasks = [];
+            test.tasks.forEach(item => {
+                const { task, topic } = findTask(item.id);
+                if (task) {
+                    const pts = (item.customPoints !== undefined && item.customPoints !== null) ? Number(item.customPoints) : (task.points || 1);
+                    fullTasks.push({ ...task, customPoints: pts, topicSlug: topic?.slug, topicTitle: topic?.title });
+                }
+            });
+
+            if (test.autoCalcPoints) {
+                test.maxPoints = getTestTotalPoints(test);
+            }
+
+            // Build solutions HTML
+            let solutionsContent = '';
+            fullTasks.forEach((task, idx) => {
+                const num = idx + 1;
+                const typeLabel = task.type === 'closed' ? 'Zamknięte' : (task.type === 'pf' ? 'P/F' : 'Otwarte');
+                let answer = '';
+                if (task.correctAnswer) {
+                    answer = task.correctAnswer;
+                }
+                if (task.type === 'pf' && task.pfAnswers && task.pfAnswers.length > 0) {
+                    answer = task.pfAnswers.map((a, i) => (i+1) + '. ' + a).join(', ');
+                }
+
+                const solutionText = task.solution || 'Brak rozwiązania';
+
+                solutionsContent += `
+                    <div style="margin-bottom: 28px; page-break-inside: avoid;">
+                        <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; border-bottom: 2px solid #4F46E5; padding-bottom: 6px;">
+                            <span style="font-size: 1.1rem; font-weight: 800; color: #4F46E5;">Zadanie ${num}</span>
+                            <span style="font-size: 0.85rem; color: #888;">${typeLabel} • ${task.customPoints} pkt</span>
+                            <span style="font-size: 0.85rem; font-weight: 600; margin-left: auto;">Odpowiedź: ${parseMarkdown(answer)}</span>
+                        </div>
+                        <div style="font-size: 0.92rem; line-height: 1.7; color: #333;" class="solution-cell">${parseMarkdown(solutionText)}</div>
+                    </div>`;
+            });
+
+            const solutionsHtml = `
+                <div class="print-only solutions-print" style="display: none;">
+                    <div class="test-print-page page-first" style="padding: 40px;">
+                        <div style="text-align: center; margin-bottom: 30px;">
+                            <div style="font-size: 1.4rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">${test.title || 'SPRAWDZIAN Z MATEMATYKI'}</div>
+                            <div style="font-size: 1.1rem; font-weight: 700; color: #4F46E5; margin-top: 8px;">PEŁNE ROZWIĄZANIA</div>
+                            <div style="font-size: 0.85rem; color: #888; margin-top: 4px;">Maksymalna liczba punktów: ${test.maxPoints}</div>
+                        </div>
+                        ${solutionsContent}
+                    </div>
+                </div>`;
+
+            // Remove any existing solutions print
+            document.querySelectorAll('.solutions-print').forEach(el => el.remove());
+            // Temporarily hide the main test print sheet
+            const mainPrint = document.querySelector('.print-only:not(.solutions-print):not(.answer-key-print)');
+            if (mainPrint) mainPrint.classList.add('print-hidden');
+
+            // Insert the solutions
+            const appEl = document.getElementById('app') || document.body;
+            appEl.insertAdjacentHTML('beforeend', solutionsHtml);
+
+            const solEl = document.querySelector('.solutions-print');
+            if (solEl) {
+                renderMath(solEl);
+            }
+
+            // Print
+            setTimeout(() => {
+                window.print();
+                // Cleanup
+                setTimeout(() => {
+                    document.querySelectorAll('.solutions-print').forEach(el => el.remove());
+                    if (mainPrint) mainPrint.classList.remove('print-hidden');
+                }, 500);
+            }, 200);
         }
 
         function moveTaskInTest(idx, direction) {
