@@ -35564,15 +35564,23 @@
           "source": "Matura maj 2026",
           "category": "Statystyka",
           "points": 1,
-          "type": "open",
-          "content": "Nauczyciel matematyki po każdym sprawdzianie porównuje wyniki uzyskane przez uczniów dwóch klas: klasy IV A oraz klasy IV B. Diagramy słupkowe pokazują rozkład ocen. Klasa IV A: ocena 1 - 1 uczeń, ocena 2 - 6 uczniów, ocena 3 - 3 uczniów, ocena 4 - 3 uczniów, ocena 5 - 6 uczniów, ocena 6 - 1 uczeń. Klasa IV B: ocena 1 - 1 uczeń, ocena 2 - 3 uczniów, ocena 3 - 6 uczniów, ocena 4 - 6 uczniów, ocena 5 - 3 uczniów, ocena 6 - 1 uczeń. Oceń prawdziwość stwierdzeń. (1) Średnia arytmetyczna ocen ze sprawdzianu w klasie IV A jest równa średniej arytmetycznej ocen w klasie IV B. (2) Mediana ocen w klasie IV A jest równa medianie ocen w klasie IV B.\n\n**Prawidłowa odpowiedź:** P, P",
+          "type": "pf",
+          "content": "Nauczyciel matematyki po każdym sprawdzianie porównuje wyniki uzyskane przez uczniów dwóch klas: klasy IV A oraz klasy IV B. Diagramy słupkowe pokazują rozkład ocen. Klasa IV A: ocena 1 - 1 uczeń, ocena 2 - 6 uczniów, ocena 3 - 3 uczniów, ocena 4 - 3 uczniów, ocena 5 - 6 uczniów, ocena 6 - 1 uczeń. Klasa IV B: ocena 1 - 1 uczeń, ocena 2 - 3 uczniów, ocena 3 - 6 uczniów, ocena 4 - 6 uczniów, ocena 5 - 3 uczniów, ocena 6 - 1 uczeń. Oceń prawdziwość stwierdzeń. Wybierz P, jeśli stwierdzenie jest prawdziwe, albo F – jeśli jest fałszywe.",
           "answers": [],
           "correctAnswer": "P, P",
           "solution": "**Średnie.**\n\nKlasa IV A (\\(20\\) uczniów):\n\n$$\\bar{x}_A=\\frac{1\\cdot 1+6\\cdot 2+3\\cdot 3+3\\cdot 4+6\\cdot 5+1\\cdot 6}{20}=\\frac{1+12+9+12+30+6}{20}=\\frac{70}{20}=3{,}5$$\n\nKlasa IV B (\\(20\\) uczniów):\n\n$$\\bar{x}_B=\\frac{1\\cdot 1+3\\cdot 2+6\\cdot 3+6\\cdot 4+3\\cdot 5+1\\cdot 6}{20}=\\frac{1+6+18+24+15+6}{20}=\\frac{70}{20}=3{,}5$$\n\nŚrednie są równe. **(1) P.**\n\n**Mediany.**\n\nDla 20 ocen mediana to średnia 10. i 11. wyrazu w ciągu uporządkowanym.\n\n- Klasa IV A: skumulowane liczby ocen \\(1,7,10,13,19,20\\). 10. ocena = 3, 11. ocena = 4. Mediana \\(=\\tfrac{3+4}{2}=3{,}5\\).\n- Klasa IV B: skumulowane liczby ocen \\(1,4,10,16,19,20\\). 10. ocena = 3, 11. ocena = 4. Mediana \\(=\\tfrac{3+4}{2}=3{,}5\\).\n\nMediany są równe. **(2) P.**\n\n**Odpowiedź: P, P.**",
           "images": [
             "images/solutions-generated/matura-maj-2026/zad31.png"
           ],
-          "level": "Podstawa"
+          "level": "Podstawa",
+          "pfStatements": [
+            "Średnia arytmetyczna ocen ze sprawdzianu w klasie IV A jest równa średniej arytmetycznej ocen w klasie IV B.",
+            "Mediana ocen w klasie IV A jest równa medianie ocen w klasie IV B."
+          ],
+          "pfAnswers": [
+            "P",
+            "P"
+          ]
         },
         {
           "id": "matura-pr-bna-cke-marzec-2026-34",
