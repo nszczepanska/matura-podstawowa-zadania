@@ -16051,7 +16051,9 @@
           ],
           "correctAnswer": "C",
           "solution": "Zewnętrzne pasy można wybrać na \\(10\\) różnych sposobów. Wewnętrzne możemy wybrać na \\(9\\) sposobów, bo zawsze odpadnie nam ten kolor, który jest już w pasie zewnętrznym. Z reguły mnożenia wynika więc, że mamy \\(10\\cdot9=90\\) możliwości utworzenia takiej flagi.",
-          "images": [],
+          "images": [
+            "images/matura-maj-2012-24.png"
+          ],
           "level": "Podstawa"
         },
         {
