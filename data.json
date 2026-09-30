@@ -15,13 +15,16 @@
           "source": "Matura maj 2026",
           "category": "Ciągi",
           "points": 1,
-          "type": "open",
+          "type": "gap_fill",
           "content": "Ciąg geometryczny \\((a_n)\\) jest określony dla każdej liczby naturalnej \\(n\\ge 1\\). Wyrazy trzeci i szósty tego ciągu spełniają warunek \\(a_3\\cdot a_6=18\\). Uzupełnij zdanie. Wpisz odpowiednią liczbę w wykropkowanym miejscu, aby zdanie było prawdziwe. Iloczyn \\(a_2\\cdot a_7\\) jest równy ………… .\n\n**Prawidłowa odpowiedź:** 18",
           "answers": [],
           "correctAnswer": "18",
           "solution": "Korzystamy ze wzoru ogólnego ciągu geometrycznego: \\(a_n=a_1\\cdot q^{n-1}\\).\n\n$$a_3\\cdot a_6=a_1 q^{2}\\cdot a_1 q^{5}=a_1^{2}q^{7}=18$$\n\n$$a_2\\cdot a_7=a_1 q\\cdot a_1 q^{6}=a_1^{2}q^{7}$$\n\nCzyli \\(a_2\\cdot a_7=a_3\\cdot a_6=\\mathbf{18}\\).\n\n**Klucz: dla ciągów geometrycznych iloczyn wyrazów równoodległych od końców jest stały.**\n\n**Odpowiedź:** \\(18\\).",
           "images": [],
-          "level": "Podstawa"
+          "level": "Podstawa",
+          "gapAnswers": [
+            "18"
+          ]
         },
         {
           "id": "matura-maj-2026-18",
@@ -4041,7 +4044,7 @@
     {
       "slug": "funkcja-kwadratowa",
       "title": "Funkcja kwadratowa",
-      "taskCount": 136,
+      "taskCount": 138,
       "tasks": [
         {
           "id": "matura-maj-2026-36",
@@ -4259,16 +4262,56 @@
           "level": "Podstawa"
         },
         {
-          "id": "matura-maj-2025-12",
-          "title": "Zadanie matura-maj-2025-12",
+          "id": "matura-maj-2025-12.1",
+          "title": "Zadanie matura-maj-2025-12.1",
           "source": "Matura maj 2025",
           "category": "Funkcja kwadratowa",
-          "points": 4,
+          "points": 1,
           "type": "open",
-          "content": "W kartezjańskim układzie współrzędnych \\((x, y)\\) przedstawiono fragment paraboli, która jest wykresem funkcji kwadratowej \\(f\\) (zobacz rysunek). Wierzchołek tej paraboli ma współrzędne \\((3,6)\\). Ta parabola przecina oś \\(Oy\\) w punkcie o współrzędnych \\((0,3)\\).\n\n**a)** Wyznacz wzór funkcji \\(f\\) w postaci kanonicznej. Zapisz obliczenia.\n\n**b)** Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych. Osią symetrii wykresu funkcji \\(f\\) jest prosta o równaniu\n\nA. \\(x = 3\\)\nB. \\(x = -3\\)\nC. \\(y = 6\\)\nD. \\(y = -6\\)\n\n**c)** Funkcja \\(g\\) jest określona dla każdej liczby rzeczywistej \\(x\\) wzorem \\(g(x)=f(x)-3\\). Liczby \\(x_{1}\\) oraz \\(x_{2}\\) są różnymi miejscami zerowymi funkcji \\(g\\). Uzupełnij zdanie. Wpisz odpowiednią liczbę w wykropkowanym miejscu, aby zdanie było prawdziwe. Suma \\(x_{1}+x_{2}\\) jest równa ……………\n\n**Prawidłowa odpowiedź:** a) \\(f(x)=-\\frac{1}{3}(x-3)^2+6\\)\nb) A\nc) \\(6\\)",
+          "content": "W kartezjańskim układzie współrzędnych \\((x, y)\\) przedstawiono fragment paraboli, która jest wykresem funkcji kwadratowej \\(f\\) (zobacz rysunek). Wierzchołek tej paraboli ma współrzędne \\((3,6)\\). Ta parabola przecina oś \\(Oy\\) w punkcie o współrzędnych \\((0,3)\\).\n\n**a)** Wyznacz wzór funkcji \\(f\\) w postaci kanonicznej. Zapisz obliczenia.",
           "answers": [],
-          "correctAnswer": "a) \\(f(x)=-\\frac{1}{3}(x-3)^2+6\\)\nb) A\nc) \\(6\\)",
-          "solution": "**a)** W zadaniu skorzystamy z postaci kanonicznej typu \\(f(x)=a(x-p)^2+q\\), gdzie \\(p\\) oraz \\(q\\) to współrzędne wierzchołka paraboli \\(W=(p;q)\\). Moglibyśmy więc zapisać, że:\n\n$$f(x)=a(x-3)^2+6$$\n\nDo poznania pełnego wzoru brakuje nam jeszcze współczynnika \\(a\\). Poznamy go, gdy podstawimy współrzędne punktu przecięcia się wykresu z osią \\(Oy\\), czyli punktu o współrzędnych \\((0,3)\\). W związku z tym:\n\n$$\\begin{aligned}\n3 &= a(0-3)^2+6 \\\\\n3 &= a(-3)^2+6 \\\\\n3 &= 9a+6 \\\\\n-3 &= 9a \\\\\na &= -\\frac{1}{3}\n\\end{aligned}$$\n\nTo oznacza, że ta funkcja wyraża się wzorem:\n\n$$f(x)=-\\frac{1}{3}(x-3)^2+6$$\n\n**b)** Oś symetrii paraboli to linia równoległa do osi \\(Oy\\), która przechodzi przez wierzchołek. W naszym przypadku osią symetrii będzie więc prosta opisana równaniem \\(x=3\\).\n\n**c)** Miejscami zerowymi są argumenty \\(x\\), dla których funkcja przyjmuje wartość równą \\(0\\). Ze wzoru \\(g(x)=f(x)-3\\) wynika, że funkcja \\(g(x)\\) powstaje w wyniku przesunięcia się funkcji \\(f(x)\\) o trzy jednostki w dół. To sprawi, że pierwszym miejscem zerowym takiej funkcji będzie \\(x_{1}=0\\), a drugim będzie \\(x_{2}=6\\).\n\nTym samym:\n\n$$x_{1}+x_{2}=0+6=6$$",
+          "correctAnswer": "\\(f(x)=-\\frac{1}{3}(x-3)^2+6\\)",
+          "solution": "**a)** W zadaniu skorzystamy z postaci kanonicznej typu \\(f(x)=a(x-p)^2+q\\), gdzie \\(p\\) oraz \\(q\\) to współrzędne wierzchołka paraboli \\(W=(p;q)\\). Moglibyśmy więc zapisać, że:\n\n$$f(x)=a(x-3)^2+6$$\n\nDo poznania pełnego wzoru brakuje nam jeszcze współczynnika \\(a\\). Poznamy go, gdy podstawimy współrzędne punktu przecięcia się wykresu z osią \\(Oy\\), czyli punktu o współrzędnych \\((0,3)\\). W związku z tym:\n\n$$\\begin{aligned}\n3 &= a(0-3)^2+6 \\\\\n3 &= a(-3)^2+6 \\\\\n3 &= 9a+6 \\\\\n-3 &= 9a \\\\\na &= -\\frac{1}{3}\n\\end{aligned}$$\n\nTo oznacza, że ta funkcja wyraża się wzorem:\n\n$$f(x)=-\\frac{1}{3}(x-3)^2+6$$",
+          "images": [
+            "images/matemaks/g12/g1261.png"
+          ],
+          "level": "Podstawa"
+        },
+        {
+          "id": "matura-maj-2025-12.2",
+          "title": "Zadanie matura-maj-2025-12.2",
+          "source": "Matura maj 2025",
+          "category": "Funkcja kwadratowa",
+          "points": 1,
+          "type": "closed",
+          "content": "W kartezjańskim układzie współrzędnych \\((x, y)\\) przedstawiono fragment paraboli, która jest wykresem funkcji kwadratowej \\(f\\) (zobacz rysunek). Wierzchołek tej paraboli ma współrzędne \\((3,6)\\). Ta parabola przecina oś \\(Oy\\) w punkcie o współrzędnych \\((0,3)\\).\n\n**b)** Dokończ zdanie. Wybierz właściwą odpowiedź spośród podanych. Osią symetrii wykresu funkcji \\(f\\) jest prosta o równaniu",
+          "answers": [
+            "**A.** \\(x = 3\\)",
+            "**B.** \\(x = -3\\)",
+            "**C.** \\(y = 6\\)",
+            "**D.** \\(y = -6\\)"
+          ],
+          "correctAnswer": "A",
+          "solution": "**b)** Oś symetrii paraboli to linia równoległa do osi \\(Oy\\), która przechodzi przez wierzchołek. W naszym przypadku osią symetrii będzie więc prosta opisana równaniem \\(x=3\\).",
+          "images": [
+            "images/matemaks/g12/g1261.png"
+          ],
+          "level": "Podstawa"
+        },
+        {
+          "id": "matura-maj-2025-12.3",
+          "title": "Zadanie matura-maj-2025-12.3",
+          "source": "Matura maj 2025",
+          "category": "Funkcja kwadratowa",
+          "points": 2,
+          "type": "gap_fill",
+          "content": "W kartezjańskim układzie współrzędnych \\((x, y)\\) przedstawiono fragment paraboli, która jest wykresem funkcji kwadratowej \\(f\\) (zobacz rysunek). Wierzchołek tej paraboli ma współrzędne \\((3,6)\\). Ta parabola przecina oś \\(Oy\\) w punkcie o współrzędnych \\((0,3)\\).\n\n**c)** Funkcja \\(g\\) jest określona dla każdej liczby rzeczywistej \\(x\\) wzorem \\(g(x)=f(x)-3\\). Liczby \\(x_{1}\\) oraz \\(x_{2}\\) są różnymi miejscami zerowymi funkcji \\(g\\). Uzupełnij zdanie. Wpisz odpowiednią liczbę w wykropkowanym miejscu, aby zdanie było prawdziwe. Suma \\(x_{1}+x_{2}\\) jest równa ……………",
+          "answers": [],
+          "gapAnswers": [
+            "6"
+          ],
+          "correctAnswer": "6",
+          "solution": "**c)** Miejscami zerowymi są argumenty \\(x\\), dla których funkcja przyjmuje wartość równą \\(0\\). Ze wzoru \\(g(x)=f(x)-3\\) wynika, że funkcja \\(g(x)\\) powstaje w wyniku przesunięcia się funkcji \\(f(x)\\) o trzy jednostki w dół. To sprawi, że pierwszym miejscem zerowym takiej funkcji będzie \\(x_{1}=0\\), a drugim będzie \\(x_{2}=6\\).\n\nTym samym:\n\n$$x_{1}+x_{2}=0+6=6$$",
           "images": [
             "images/matemaks/g12/g1261.png"
           ],
@@ -35632,15 +35675,19 @@
           "source": "Matura maj 2025",
           "category": "Statystyka",
           "points": 1,
-          "type": "open",
-          "content": "Na diagramie przedstawiono wyniki sprawdzianu z matematyki w pewnej klasie maturalnej liczącej \\(24\\) uczniów. Na osi poziomej podano oceny, które uzyskali uczniowie tej klasy, a na osi pionowej podano liczbę uczniów, którzy otrzymali daną ocenę. Uzupełnij zdania. Wpisz odpowiednie liczby w wykropkowanych miejscach, aby zdania były prawdziwe. Mediana ocen uzyskanych \\(z\\) tego sprawdzianu przez uczniów tej klasy jest równa ......... . Dominanta ocen uzyskanych \\(z\\) tego sprawdzianu przez uczniów tej klasy jest równa ......... .\n\n**Prawidłowa odpowiedź:** \\(4{,}5\\)\\(6\\)",
+          "type": "gap_fill",
+          "content": "Na diagramie przedstawiono wyniki sprawdzianu z matematyki w pewnej klasie maturalnej liczącej \\(24\\) uczniów. Na osi poziomej podano oceny, które uzyskali uczniowie tej klasy, a na osi pionowej podano liczbę uczniów, którzy otrzymali daną ocenę. Uzupełnij zdania. Wpisz odpowiednie liczby w wykropkowanych miejscach, aby zdania były prawdziwe.<br><br>Mediana ocen uzyskanych z tego sprawdzianu przez uczniów tej klasy jest równa ......... .<br>Dominanta ocen uzyskanych z tego sprawdzianu przez uczniów tej klasy jest równa ......... .",
           "answers": [],
-          "correctAnswer": "\\(4{,}5\\)\\(6\\)",
+          "correctAnswer": "Mediana: 4,5, Dominanta: 6",
           "solution": "Krok 1. Obliczenie mediany.\n\nSkoro jest parzysta liczba uczniów (\\(24\\)), to mediana będzie średnią arytmetyczną dwóch środkowych ocen. W naszym przypadku oznacza to, że kiedy ułożymy oceny uczniów od najsłabszej do najlepszej, to medianą będzie średnia arytmetyczna wyniku dwunastego i trzynastego ucznia.\n\nZ diagramu możemy wywnioskować, że wypisując po kolei oceny, dwunasty uczeń otrzymał czwórkę, a trzynasty otrzymał piątkę. Stąd też mediana będzie równa:\n\n$$\\begin{aligned}\nm &= \\frac{4+5}{2} \\\\\nm &= \\frac{9}{2}=4{,}5\n\\end{aligned}$$\n\nKrok 2. Wyznaczenie dominanty.\n\nDominanta to wynik, który był najczęściej otrzymywany. W naszym przypadku najczęściej otrzymywaną oceną była szóstka, więc dominanta jest tutaj równa \\(6\\).",
           "images": [
             "images/matemaks/g12/g1266.png"
           ],
-          "level": "Podstawa"
+          "level": "Podstawa",
+          "gapAnswers": [
+            "4,5",
+            "6"
+          ]
         },
         {
           "id": "matura-maj-2025-36",
