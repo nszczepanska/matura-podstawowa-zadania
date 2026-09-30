@@ -1770,9 +1770,13 @@
                 return `<p>${p.replace(/\n/g, '<br>')}</p>`;
             }).join('');
             
-            // Restore math placeholders
-            html = html.replace(/MATHBLOCK_(\d+)_END/g, (_, idx) => mathPlaceholders[parseInt(idx)]);
-            html = html.replace(/MATHINLINE_(\d+)_END/g, (_, idx) => mathPlaceholders[parseInt(idx)]);
+            // Restore math placeholders recursively
+            let prevHtml;
+            do {
+                prevHtml = html;
+                html = html.replace(/MATHBLOCK_(\d+)_END/g, (_, idx) => mathPlaceholders[parseInt(idx)]);
+                html = html.replace(/MATHINLINE_(\d+)_END/g, (_, idx) => mathPlaceholders[parseInt(idx)]);
+            } while (html !== prevHtml);
             
             return html;
         }
