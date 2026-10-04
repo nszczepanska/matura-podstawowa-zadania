@@ -16241,7 +16241,7 @@
           "correctAnswer": "C",
           "solution": "Zewn\u0119trzne pasy mo\u017cna wybra\u0107 na \\(10\\) r\u00f3\u017cnych sposob\u00f3w. Wewn\u0119trzne mo\u017cemy wybra\u0107 na \\(9\\) sposob\u00f3w, bo zawsze odpadnie nam ten kolor, kt\u00f3ry jest ju\u017c w pasie zewn\u0119trznym. Z regu\u0142y mno\u017cenia wynika wi\u0119c, \u017ce mamy \\(10\\cdot9=90\\) mo\u017cliwo\u015bci utworzenia takiej flagi.",
           "images": [
-            "images/matura-maj-2012-24.png"
+            "images/matura-maj-2012-24.png?v=2"
           ],
           "level": "Podstawa"
         },
